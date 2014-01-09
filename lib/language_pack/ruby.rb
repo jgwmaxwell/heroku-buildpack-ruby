@@ -384,10 +384,12 @@ WARNING
 
   # installs vendored gems into the slug
   def install_language_pack_gems
+    topic "Installing language pack gems"
     instrument 'ruby.install_language_pack_gems' do
       FileUtils.mkdir_p(slug_vendor_base)
       Dir.chdir(slug_vendor_base) do |dir|
         gems.each do |g|
+          topic "Installing #{g}"
           @fetchers[:buildpack].fetch_untar("#{g}.tgz")
         end
         Dir["bin/*"].each {|path| run("chmod 755 #{path}") }
@@ -776,6 +778,7 @@ params = CGI.parse(uri.query || "")
   end
 
   def purge_bundler_cache
+    topic "Purging bundler cache"
     instrument "ruby.purge_bundler_cache" do
       FileUtils.rm_rf(bundler_cache)
       cache.clear bundler_cache
