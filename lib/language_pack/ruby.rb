@@ -394,6 +394,8 @@ WARNING
         end
         Dir["bin/*"].each {|path| run("chmod 755 #{path}") }
       end
+      topic "Slug vendor base is #{slug_vendor_base}"
+      topic "PATH is #{`echo $PATH`}"
     end
   end
 
