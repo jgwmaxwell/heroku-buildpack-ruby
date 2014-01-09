@@ -392,6 +392,7 @@ WARNING
           topic "Installing #{g}"
           @fetchers[:buildpack].fetch_untar("#{g}.tgz")
         end
+        topic "Uncompressed: #{`ls -laR`}"
         Dir["bin/*"].each {|path| run("chmod 755 #{path}") }
       end
       topic "Slug vendor base is #{slug_vendor_base}"
